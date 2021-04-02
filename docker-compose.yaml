@@ -1,0 +1,20 @@
+services:
+  wms-ssi-database:
+    image: mysql
+    container_name: sc-wms-ssi-db
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/db:/var/lib/mysql
+
+  wms-ssi-redis:
+    image: redis
+    container_name: sc-wms-ssi-redis
+    restart: unless-stopped
+    ports:
+      - 6379:6379
